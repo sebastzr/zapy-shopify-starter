@@ -2,14 +2,14 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    siteTitle: "gatsby-starter-shopify",
-    siteTitleDefault: "gatsby-starter-shopify by @GatsbyJS",
-    siteUrl: "https://shopify-demo.gatsbyjs.com",
+    siteTitle: process.env.GATSBY_SITE_TITLE,
+    siteTitleDefault: process.env.GATSBY_SITE_TITLE_TEMPLATE,
+    siteUrl: process.env.GATSBY_SITE_URL,
     hrefLang: "en",
-    siteDescription:
-      "A Gatsby starter using the latest Shopify plugin showcasing a store with product overview, individual product pages, and a cart.",
-    siteImage: "/default-og-image.jpg",
-    twitter: "@gatsbyjs",
+    siteDescription: process.env.GATSBY_SITE_DESCRIPTION,
+    siteImage: `/${process.env.GATSBY_SITE_LOGO}`,
+    googleSiteVerification: process.env.GOOGLE_SITE_VERIFICATION_TOKEN,
+    twitter: process.env.TWITTER,
   },
   flags: {
     FAST_DEV: true,
@@ -37,5 +37,26 @@ module.exports = {
         trackingId: process.env.GOOGLE_ANALYTICS_ID,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/assets/img/`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: process.env.GATSBY_SITE_TITLE,
+        short_name: process.env.GATSBY_SITE_SHORT_TITLE,
+        description: process.env.GATSBY_SITE_DESCRIPTION,
+        start_url: `/`,
+        background_color: `#000000`,
+        theme_color: process.env.GATSBY_SITE_THEME_COLOR,
+        display: `standalone`,
+        icon: `static/${process.env.GATSBY_SITE_LOGO}`,
+      },
+    },
+    `gatsby-plugin-offline`,
   ].filter(Boolean),
 }

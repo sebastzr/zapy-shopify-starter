@@ -37,6 +37,7 @@ export function Seo({
     siteImage,
     hrefLang,
     twitter,
+    googleSiteVerification,
   } = siteMetadata
 
   const seo = {
@@ -55,6 +56,7 @@ export function Seo({
       <html lang={hrefLang} />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
+      <meta name="google-site-verification" content={googleSiteVerification} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:url" content={seo.url} />
       <meta property="og:description" content={seo.description} />
@@ -85,10 +87,7 @@ export function Seo({
       />
       {/* The following meta tag is for demonstration only and can be removed */}
       {!!process.env.GATSBY_DEMO_STORE && (
-        <meta
-          name="robots"
-          content="noindex, nofollow"
-        />
+        <meta name="robots" content="noindex, nofollow" />
       )}
       {children}
     </Helmet>
